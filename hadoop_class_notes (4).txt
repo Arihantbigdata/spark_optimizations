@@ -1,0 +1,3536 @@
+Software Requirements to work with cloudera
+-------------------------------------------
+8GB Ram
+250-500 GB[No limitation]
+No of cpus-->2 cores
+os-->Linux/unix.
+
+File System
+-----------
+Linux uses a heirarchical file system structure.
+
+pwd-->Present working directory.
+
+display current path/directory
+hadoo
+>pwd
+/home/cloudera(default)
+
+
+ls-->list all the files and folders in a directory.
+
+syntax
+------
+>ls
+
+ll-->long listing
+
+mkdir-->make a dir
+
+pwd-->present working directory.
+
+
+cd-->It is used to  change directory.
+
+
+syntax
+------
+cd directoryname/foldername
+
+ex:
+cd mano.
+
+cd ..  -->Jumps one directory back.
+
+syntax
+------
+>cd ..
+
+
+chmod
+-----
+It is used  to change permissions for files and directories.
+
+
+form1
+-----
+chmod   string filename/directoryname.
+
+example
+-------
+>chmod 777 file1.txt
+
+
+grep
+----
+This is to search a string in a file.
+
+cat  > demo_file
+THIS LINE IS THE 1ST UPPER CASE LINE IN THIS FILE.
+this line is the 1st lower case line in this file.
+This Line Has All Its First Character Of The Word With Upper Case.
+
+Two lines above this line is empty.
+And this is the last line.
+
+
+form1
+-----
+grep "string"  filename
+
+example
+-------
+grep "this" demo_file
+
+form2
+-----
+grep -i "string"  filename
+
+i-->represents case insensitive.
+
+example
+-------
+grep -i "this" demo_file
+
+Pipe(|)
+-------
+It is used for concatenating multiple commands .
+
+syntax
+------
+command1  ... |command2 ....|commmand3 ... 
+
+example
+-------
+cat > bbb.txt
+...
+...
+...
+...
+
+
+example
+-------
+cat bbb.txt | more
+
+Note:Press "q" to quit.
+
+vi-->It is an editor in linux used to create and write programs.
+
+
+cat
+---
+It is used to create,append,display a file
+
+form1
+----
+cat filename
+
+display contents of a file.
+
+form2
+-----
+cat > filename
+
+creates a new file if the file doesn't exist otherwise overwrite the existing file.
+
+form3
+-----
+cat >> filename
+
+appends an existing file.
+
+
+
+File systems
+------------
+we have 2 types of file systems
+i)Linux file system(/home/cloudera)
+ii)Hadoop file system(/user/cloudera)
+
+Linux uses a heirarchical file system
+
+/
+|---------------|------------|
+etc            bin           home  .....
+|               |             |
+folder1 ..     folder1..   folder1 ....
+
+
+
+hdfs commands
+-------------
+hadoop fs -commandname
+
+hadoop fs -ls
+
+put
+get
+copyFromLocal
+copyToLocal
+
+
+put
+---
+put is used to copy a file/folder from lfs to hdfs.
+put is also used to copy a file/folder from 3rd party webservers to hdfs.
+
+syntax
+------
+hadoop fs -put  sourcepath(lfs/webserverpath) destinationpath(hdfs)
+
+ex:
+$cat > abc.txt
+My Name is Mano.
+I will never give up untill i die.
+
+
+deafult path of lfs -->/home/cloudera/
+default path of hdfs-->/user/cloudera/
+
+ex:
+$hadoop fs -put /home/cloudera/abc.txt /user/cloudera/
+
+$hadoop fs -ls
+..
+..
+..
+
+copyFromLocal
+-------------
+copy a file/folder from lfs to hdfs
+
+syntax
+------
+hadoop fs -put  sourcepath(lfs) destinationpath(hdfs)
+
+ex:
+$cat > xyz.txt
+My Name is Manu.
+Iam living for a purpose.
+
+$hadoop fs -copyFromLocal  /home/cloudera/xyz.txt /user/cloudera/
+
+
+get
+---
+copy a file/folder from hdfs to lfs/3rd party webserver
+
+
+syntax
+------
+
+$hadoop fs -get  sourcepath(hdfspath)  destinationpath(lfs/webserverpath)
+
+ex:
+$hadoop fs -get  /user/cloudera/t1.txt  /home/cloudera/
+
+
+copyToLocal
+-----------  
+copy a file/folder from hdfs to lfs
+
+syntax
+------
+$hadoop fs -copyToLocal  sourcepath(hdfspath)  destinationpath(lfs)
+
+ex:
+$hadoop fs -copyToLocal  /user/cloudera/t2.txt  /home/cloudera/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Data
+---
+Data is an information.
+
+Data is of 2 types
+
+i)Limited Data.
+ii)UnLimited Data.
+
+Limited Data
+------------
+This data can be stored and managed by RDBMS machines.
+Generally this is generated in multiples of TB[terabyte]
+This is Enterprise level data.
+
+Unlimited Data
+--------------
+Data which is generated from time to time without any limit through different sources like facebook,ecommerce webistes,different trasport systems etc
+This unlimited data is called BIgData.
+
+we use Bigdata frameworks to process unlimited data.
+
+example
+-------
+Hadoop,Storm,Swarm etc
+
+Varieties of data
+------------------
+Data comes in 3 varieties
+
+i)structured 
+ii)Unstructured
+iii)Semistructured
+
+
+
+Strucured -->This is data maintained in a table form.
+          -->This form 5-10% of total data
+
+Unstructured-->Data like video,audio,images,text files etc is unstructured data.
+           -->80-90% of total data
+
+Semistsructured-->This is data like xml,csv etc
+              -->This form 5-10% of total data
+
+
+
+charcteristics of big data
+---------------------------
+v-volume
+How much data is generated for 1 sec/1min/1 hour.
+
+v-velocity-->At what speed this data is generated .
+v-variety-->Types of data.
+
+
+Applications of BigData
+-----------------------
+Better decision making.
+Better customer satisfaction.
+cost effective.
+Improoved infracture.
+
+Hadoop
+------
+It is a big data framework which is opensource used to store,process and analyze huge volume of data built on top commodity hardware.
+
+
+Limitations of RDBMS
+--------------------
+i)It is used to store structured data.
+ii)It has limited scalability.
+iii)It is very expensive.
+iv)Not Highly Fault tolerant.
+
+Hadoop
+------
+Hadoop is an opensource big data framework used to store,process and analyse huge volumes of data built using commodity(low price) hardware.
+
+Hadoop is not a database but it is a big data framework.
+
+Hadoop is used to process structured data,unstructured data and semistructured data.
+
+Hadoop is scalable i,e if a cluster has 200 nodes and if all the cluster's are busy and if the data load increases simultaneously then we can add extra nodes to the cluster this is called scalability.
+
+Hadoop stores data in the form of blocks and each block has a capacity of 64mb(hadoop 1.x) and 128 mb(hadoop2.x).
+
+Hadoop is highly fault tolerant because of replication factor i,e each block has 3 replicas in a hadoop cluster.
+
+The default replication factor is 3.
+
+Hadoop can be used to build hybrid systems i,e we can integrate rdbms with hadoop.
+
+Hadoop uses dfs[distribted file system] and supports parallel processing.
+
+
+Core components of Hadoop
+-------------------------
+Hadoop has 2 core components
+
+i)Hdfs[hadoop distributed file system]
+ii)MapReduce
+
+Hdfs--->It is used for storage of large datasets on  commodity               software.
+    --->Hdfs uses distributed file system i,e if we give a file as input then that file is divided into blocks and these blocks are stored across the slave machines in a cluster.
+    --->The size of the blocks can be 64MB[hadoop1.x] and 128 mb[hadoop 2.x],the block can be configured i,e we can increase or decrease the size of the block.
+    --->The blocks which are distributed across the cluster are processed parallely by the slave machines in which the data is stored ,this is called parallel processing which increases the performnace of processing.
+
+    -->It is highly fault tolerant.
+         In hdfs we have replication factor of blocks i,e each block has a 3 replicas by default.
+   --->If any node[slave machine is down] then hadoop will get data from a another nodes where replicas are stored.In this way hadoop is higly fault tolerant.
+
+    -->It is completely written in java.
+    -->Highly available.
+    -->Quick automatice recovery process.
+   
+MapReduce-->It used for data processing.
+
+Hdfs Architecture
+-----------------
+Hdfs has the follwing services running.
+
+i)NameNode.
+ii)Secondary NameNode.
+iii)JobTracker.
+iv)TaskTracker.
+v)DataNode.
+
+
+NameNode,JobTracker,Secondary NameNode run on Master server.
+
+DataNode and TaskTracker run on slave machines.
+
+Here Master and slave both are servers.
+
+All the five are software components running on top of this severs.
+
+Hdfs is highly scalable.
+
+we know hadoop handles 
+Storage 
+Processing
+
+NameNode and DataNode takes care of Storage.
+JobTracker and TaskTracker takes care of processing.
+Secondary NameNode is not a backup node for NameNode for a single point failure of NameNode but it peforms house keeping job.
+
+
+NameNode
+--------
+NameNode is a master which holds metadata of DataNodes.
+NameNode monitors datanodes and instructs Data nodes to handle storage process.
+NameNode never store Data but holds Metadata and namespace[Filestructure] information of DataNodes.
+
+what is a Metadata?
+A metadata has the following details
+
+i)Name of the files.
+ii)Block information i,e replication factor also in which datanodes blocks are available.
+iii)Rack information.
+
+Namespace-->Maitaining metadata in the form of directory strcuture is called namespace.
+
+NameNode and DataNode will communicate with each other using heartbeats.
+
+A DataNode sends a hear beat signal for every 3 seconds to the NameNode along with Block Report.
+
+A Heart beat mechanism ensures whether the DataNodes are working properly or not,if heart beats are stopped from datanodes then Name node come know to that data node is failed and assign the work of failure node to another working node in the cluster.
+
+NameNode is a single point failure in a Hadoop cluster i,e if NameNode fails then the entire cluster goes down.
+
+javamastar.blogspot.in
+
+DataNode
+--------
+DataNode is a slave machine on which is used to store files in the form of blocks
+
+The default block size is 64(hadoop1.x) and 128mb(hadoop2.x).
+
+A DataNode takes care of creating,deleting and applying replication factor on blocks with the instruction of NameNode.
+
+A DataNode will send heart beats and Block report to the NameNode,heartbeats ensures that DataNode is working fine.
+
+The default HeartBeat time inetrval is 3 seconds and if any datanode fails to send heartbeat then NameNode concludes that a DataNode is down and assigns the blocks to someother DataNode in the cluster with the help of a another working DataNode available in a cluster.
+
+The default Replication factor is 3 i,e for each block of a file 3 copies are created and split across DataNode's in a cluster.
+
+When a file is given as input say a.txt with 300 Mb size then it is spilt into 5 blocks each with capacity of 64mb,probably the last block may be less than actual size and this blocks are stored in DataNodes distributed across a cluster and also replication is applied as shown in diagram.
+
+Write Mechanism 
+---------------
+i)whenever a client want to write a file to Hdfs,it will make a request to NameNode and get the metadata from NameNode.
+
+ii)The file is split into blocks as per specification and these blocks are stored into DataNodes,
+
+iii)While writing a block to a DataNode,client consider the nearest node available and place a block into a DataNode.
+
+iv)Once after placing a block  into datanode,replication factor is applied by a datanode based on the instruction of a namenode.
+
+v)whenever we are trying to place a block,hdfs also consider rack awareness,general it is 1 block per one rack.
+
+vi)To have an optimal soultion towards rackawareness policy,instead of placing 1 block in one rack,it is recommeded to place one block in a local rack and the remianing 2 blocks in remote rack.
+
+vii)Atmost number of replicas we can keep in a rack is 2.
+
+viii)Hdfs follows a policy write once and read many times.
+
+Read Mechnism
+-------------
+i)Whenever we issue a read request to a client,the client will issue a read request to NameNode.
+
+ii)NameNode returs metadata to a client,the client will find the blocks available in the Datanode across a cluster and perform a read operation on the blocks.
+
+iii)Client will try to read blocks which are nearest to the client so that the network bandwidth is utilized in an efficient approach.
+
+iv)The advantage of distributed blocks across datanode in a cluster is we can perform parallel processing which increases the performace of hadoop i,e at a time if we have 10  blocks we can read all the 10 blocks parallely from 10 datanodes.
+
+Hadoop configuration files
+--------------------------
+core-site.xml-->The common config details of both hdfs and mapreduce are declared here. 
+
+hdfs-site.xml-->
+It has Namenode,Datanode and Secondary Name node configuration details.
+
+mapred-site.xml-->Jobtracker and task tracker config details.
+
+We find the above config files in the apth /etc/hadoop/conf.
+
+Limitations of Hdoop 1.x
+------------------------
+i)1 NameNode and 1 Namespace,Namenode is a singe point of failure i,e if a namenode is down the entire cluster is down.
+
+ii)JobTracker is fully overloaded because jobtracker has to take care of both Resource Mangement like (RAm,cpu,disk,network) and also scheduling.
+
+iii)Maximum number of nodes in a cluster cab be 4000 .
+
+iv)No Horizontal scalability for Namenode.
+
+v)It supports only one processing model i,e Mapreduce..
+
+vi)It supports only batch processing.
+
+vii)No support for streaming data.
+
+viii)It has fixed Map and Reduce slots i,e once hadoop allocated Ram,cpu,disk,network for Mapper or reducer then they cannot be used by another mapper/reducer even though they are idle.
+
+ix)It doesn't support multitenancy. 
+
+
+Hadoop v2
+---------
+i)NameNode is not a single point of failure,It has a hot stand by NameNode.
+
+ii)Haoodp v2 uses yarn/MRV2[Mapreduce version2] which takes the responbilities of JobTracker,yarn is not overloaded like jobtracker.
+
+iii)Maximum no of nodes in a cluster,10000
+
+iv)Horizontal scalability for Namenode.
+
+v)It supports Mutiple  processing model i,e Mapreduce,spark,iterative,graphical etc
+
+vi)Support for streaming data, batch processing etc
+
+vii)No fixed map and reduce slots but used dynamic containers.
+
+ix)It support multitenancy. 
+
+Yarn Architecture Flow
+-----------------------
+1)User will submit a job to Resource Manager.
+
+2)Resource Manager will issue a request to Application Manager to communicte with NodeManager and start Application Master.
+
+3)In a yarn Architecture No of Node Managers is one per machine or System.
+
+4)Number of Application Master running is equivalent to  no of Application's submitted by user i,e MapReduce,Apache Tez,Spark .
+
+Here All MapReduce jobs are treated as MapReduce Application.
+
+5)Each Node Manager is associated with 1 Application Master(s) i,e 1 per Application
+
+MapReduce--1 App Master.
+Spark--1 App Master.
+Apache Tez--1 App Master.
+
+6) An Application Master is by default in sleep mode(passive mode)
+
+7)Whenever Resource Manager needs to Process a job then it instruct NodeManager to lauch Application Master which is in sleep mode.
+
+8)Once Node Manager launch Application Master,AM will request for containers to the scheduler of Resource Manager.
+
+9)Here Scheduler allocate Resources for containers.
+
+10)A container is collection of (RAM,cpu,disk,Network) in which Application tasks are executed.
+
+11)Once Resources are allocated by Scheduler,Application Master  will request NodeManager to launch Containers where the tasks are executed.
+
+12)Node Manager will track and monitor the life cycle of containers and update the status to ResourceManger's Application Manager through Application Master.
+
+13)Application Master acts a communication channel bewteen Nodemanger and ResourceManager.
+
+14)Till 2.0 version there is a SPOF[single point of failure] for Resource Manager but from then it has a Stand By(Passive RM),if the active RM is down then the passive will become active immediately,this makes RM higly fault tolerant.
+
+15)If any node is down where Node Manager and App master is running,then if the App Master is destroyed then the other  NodeManagers reporting to App master can directly communicate with RM.
+
+16)To Clarify the above stament,An Application Master will requesr for containers where ever data is available,An Application Master running in one Node will communicate with other  NodeManager's running in other machine's,All these NodeManager's will report the status of Node to App Master and App Master will update the status to RM.
+
+16)Here Application Master can Allocate containers in different Node's and Track the staus of Application through these NM as discussed above.
+
+RM             <--->        APP Master<---->NM1
+Scheduler                              
+App Manager                           <--->NM2
+                                      <--->NM3
+                                     ..
+ 17)Here Application Manager of RM will take care of Monitoring and Tracking the status of Node's through App Master as shown above.
+
+18)NodeManagers will send heart beats consistently to App Master and App Master update the same to Application Manager of RM.
+
+18)If Application Manager is not receiving heart beats for atleast 10 mins from a NodeManager through Application Master ,then the Resource Manager assumes the NodeManager is down and assigns the Job to some other NodeManager running in the cluster.
+
+
+Hive
+----
+Datawarehouse--->collection of databases.
+Database--->collection of tables.
+Tables-->collection of rows.
+row-->collection of columns.
+
+
+
+
+Hive database and tables are stored in hdfs under the path 
+/user/hive/warehouse
+
+Database is stored in the form a directory with extension .db
+like emp.db,stud.db
+
+Tables are stored in form of subdirectory under a root directory[database].
+
+Hive uses a default database called "default" under which tables are created in form of a sub directory.
+
+we have 2 types of databases 
+i)default
+ii)customized
+
+Default
+-------
+By default all the tables are created under default database.
+
+customized 
+----------
+we can create our own databases in hive and we call such databases as customized databases.
+
+
+How to enter into hive.
+[cloudera@quickstart ~]hive-->enter
+
+
+Displaying databases
+--------------------
+hive>show databases;
+
+default
+manohar
+sales
+..
+..
+
+How to create a custom database
+-------------------------------
+hive>create database databasename;
+
+ex:
+hive>create database manohar;
+
+
+In hdfs a database is created 
+-----------------------------
+/user/hive/warehouse/manohar.db
+ 
+
+how to change database
+----------------------
+hive>use databasename;
+
+ex:
+hive>use manohar;
+
+How to drop a database
+----------------------
+hive>drop database databasename;
+
+ex:
+hive>drop database manohar;
+
+Note:
+before dropping a database,the database must be empty.
+
+
+Hive datatypes
+--------------
+Numeric types.
+Date/Time.
+String types.
+Misc types.
+complex types.
+
+Numeric types
+-------------
+tinyint--1 byte
+smallint--2 byte
+int--4 bytes
+bigint --8 bytes
+float  --4 bytes
+double --8 bytes
+decimal--16 bytes
+
+Date/time
+---------
+timestamp
+date
+
+string types
+------------
+string
+char
+varchar
+
+Misc types
+----------
+boolean
+binary
+
+complex types
+-------------
+arrays
+maps
+structs
+union
+
+
+creating and loding data into a hive table
+------------------------------------------
+step1:create a file in local file system
+
+$cat > abc.txt
+My Name is Manohar
+Iam Best at teaching
+I love teaching
+^c
+
+path-->/home/cloudera
+
+step2:create a table in hive
+hive>create table tab1(line string);
+
+step3:loading data into hive table
+
+we load data into hive table by using the command load
+
+syntax
+------
+hive>load data local inpath 'filepath' into table tablename;
+
+ex:
+load data local inpath 'abc.txt' into table tab1;
+
+
+step4:displaying data from hive table
+hive>select *from tab1;
+
+How to check schema/metadata of hive table
+------------------------------------------
+describe tablename;
+
+ex:
+hive>describe tab1;
+line      string
+
+In hdfs a hive database/table/data is represented as shown below
+----------------------------------------------------------------
+whene we create a database and under database we create a table,database is created as a directory and table is created as subdirectory as shown below,
+
+/user/hive/warehouse--->deafult-->tab1-->abc.txt
+
+
+How to cheeck hive data in hdfs
+-------------------------------
+$hadoop fs -ls /user/hive/warehouse/tab1/
+
+/user/hive/warehouse/tab1/file1
+
+How to display data from a file
+-------------------------------
+$hadoop fs -cat /user/hive/warehouse/tab1/file1
+My Name is Manohar
+....
+....
+
+dropping an inner table
+-----------------------
+syntax
+------
+drop table tablename;
+
+ex:
+drop table tab1;
+
+Here we loose only metadata but not  data.
+
+In hdfs
+   
+$hadoop fs -cat /user/hive/warehouse/tab1/abc.txt
+
+Here we both the table directory and and file is available from the database directory.
+
+How to view metadata of a table from hive prompt
+------------------------------------------------
+hive>decribe tab1;
+Table not found
+
+
+Hive architecture
+-----------------
+The major components of hive architecture are
+
+Metastore:
+stores metadata of each table like table schema and thrie location.
+The data is kept in a traditinla rdbms format.
+The metadata helps driver to keep track of data.
+A back up server regularly  replicates metadata so that we can retrieve data incase of data loss.
+
+Driver
+-----
+A driver acts controller,it accepts hql statements as input,executes and return back the result.
+
+Compiler
+--------
+checks for compilation errors  and creates the execution plan for a query.
+
+Optimizer
+---------
+Optimizes the execution plan by creating an DAG.
+
+Executor
+--------
+executes the tasks according to DAG[Directed Asyclic Graph],It interacts with Resource Manager to executes tasks.
+
+UI-->User interface to submit a hive job.
+CLI-->command line interface to submit a job.
+Thrift server-->It allows external clients to interact with hive just like jdbc and odbc do.
+
+
+Hive tables
+-----------
+Inner and external tables.
+partitioned and Non partitioned tables.
+Bucketd and Non bucketed tables.
+
+inner vs external tables
+
+when an inner table is dropped both metadata and data will be deleted.
+
+when an external table is dropped only metadata is deleted.
+
+From hive if we drop an inner table,the directory in hdfs is also deleted.
+
+From hive if we drop an external table,the directory in hdfs is available.
+
+if we drop inner table we loose both table and data where as if we drop external table we loose only table but not data and we can reuse the data if needed.
+
+creating and testing external tables
+---------------------------------
+hive>cat > file1
+AAAAA
+AAAAA
+^c
+
+Note:By default each table is inner table.
+
+creating external table.
+--------------------
+hive>create external table tab1(line string);
+
+In hdfs /user/hive/warehouse/tab1 a directory is created.
+
+hive>desc tab1;
+
+loading data into table
+-----------------------
+syntax
+------
+load data local inpath 'filename' into table tablename;
+
+
+hive>load data local inpath 'file1' into table tab1;
+
+In hdfs 
+   /user/hive/warehouse/tab1/file1
+
+file1 is copied into tab1 directory from local.
+
+displaying data
+---------------
+hive>select *from tab1;
+AAAA
+AAAA
+AAAA
+AAAA
+
+drop table tab1
+---------------
+drop table tab1;
+
+
+Now hive starts reading data from all the tables.
+
+cat>file2
+BBBB
+BBBB
+^c
+
+creating inner and external tables in custom hdfs location
+----------------------------------------------------------
+we can create either inner/external table in a custom hdfs location  
+
+
+
+hive> create table mytab1(line string)
+    > location '/guru/myloc';
+
+FAILED: Execution Error, return code 1 from org.apache.hadoop.hive.ql.exec.DDLTask. MetaException(message:Got exception: org.apache.hadoop.security.AccessControlException Permission denied: user=cloudera, access=WRITE, inode="/mano":hdfs:supergroup:drwxr-xr-x
+
+How to handle issue
+-------------------
+create a supergroup and assign it to cloudera.
+
+[cloudera@quickstart ~]$ sudo groupadd supergroup
+[cloudera@quickstart ~]$ usermod -a -G supergroup cloudera
+bash: /usr/sbin/usermod: Permission denied
+[cloudera@quickstart ~]$ sudo usermod -a -G supergroup cloudera
+
+solution2
+---------
+Also set hive.metastore.schema.verification =true;
+
+$cat > abc.txt
+aaaaa
+bbbbb
+ccccc
+ddddd
+eeeee
+
+hive>load data local inpath 'abc.txt' into table mytab1;
+
+In hdfs,
+   /guru/myloc/abc.txt is available 
+     
+hive>drop table tab1;
+
+if it is inner table /guru/myloc  will be deleted otherwise it is available 
+
+Loading data into tables
+------------------------
+we can load in 2 ways 
+i)using load command
+ii)Using -copyFromLocal/put
+
+Appending data to a file
+------------------------
+If we copy multiple files into a table,the data gets appended.
+
+cat > sample1
+..
+..
+
+cat > sample2
+..
+..
+
+overwriting data into a table
+-----------------------------
+if we want data to overwritten instead of appending data to a table then we can use the command overwrite along with the query
+
+[cloudera@quickstart ~]$ cat > sample1
+1
+2
+3
+4
+^C
+[cloudera@quickstart ~]$ cat sample1
+1
+2
+3
+4
+[cloudera@quickstart ~]$ cat > file
+aaaa
+bbbb
+cccc
+dddd
+^C
+hive>create table abc(line string);
+hive> load data local inpath 'file' into table abc;
+hive> load data local inpath 'file' into table abc;
+hive>select *from abc;
+aaaa
+bbbb
+cccc
+dddd
+aaaa
+bbbb
+cccc
+dddd
+
+In Hdfs,files are loaded as shown below under path 
+/user/hive/warehouse/abc
+
+file
+file_copy_1
+
+
+hive> load data local inpath 'sample1' overwrite into table tab1;
+hive>select *from tab1;
+1
+2
+3
+4
+
+
+loading data from hdfs
+----------------------
+we can load data from both lfs and hdfs,if we load data from hdfs into a hive table then file in hdfs is removed and loaded into hive warehouse table.
+
+syntax
+------
+
+hive> load data inpath 'filename'  into table tablename;
+
+while loading data from hdfs,we should remove local keyword with load command.
+
+ex:
+hive> load data inpath 'file'  into table abc;
+
+file1 is removed from hdfs once it is loaded into hive table.
+
+In hive ,we can find the files under path
+
+/user/hive/warehouse/abc
+
+hive>select *from abc;
+
+
+relative path vs absoulte path
+------------------------------
+if we are coying data from default location i,e 
+
+local file system---->/home/cloudera
+hdfs--->/user/cloudera
+hive-->/user/hive/warehouse
+
+we use relative path i,e just filename/directory
+
+if we are loading data from different locations of lfs/hdfs/hive then we should use obsolute path i,e full path 
+
+$hadoop fs -mkdir /manohar/data/
+$hadoop fs -put /home/cloudera/file  /manohar/data/
+
+ex:
+load data local inpath '/manohar/data/file' into table abc;
+
+hive>select *from abc;
+
+Creating table with mutiple cols and loading data.
+--------------------------------------------------
+hive> create table tab1(a int,b int,c int);
+
+cat > file1
+1,2,3
+4,5,6
+8,8,9
+
+hive>load  data local inpath 'file1' into table tab1;
+
+hive>selct *from tab1;
+NULL NULL NULL
+NULL NULL NULL
+NULL NULL NULL
+
+Note:The default delimiter in hive table is ctrl+A,if we load any file into hive with any other delimiter like , or # etc,hive table fill col with NULL.
+
+cat >file1
+1^A2^A3
+4^A5^A6
+8^A8^A9
+
+
+overwrting file into a hive table
+---------------------------------
+suppose i have already data existing in a hive table and i want to replace old file with new file then we can use overwrite to replace old file with new file.
+
+Generally if we load a file into a hive table it is appended to the hive table.
+
+hive>load data local inpath 'file1' into table tab1;
+hive>load data local inpath 'file1' into table tab1;
+
+hive>select *from tab1;
+1 2 3
+4 5 6
+8 8 9
+1 2 3
+4 5 6
+8 8 9
+
+Here the file1 is appended into hive table tab1.
+Overwrite file in hive table
+----------------------------
+hive>load data local inpath 'filename' overwrite into table tab1;
+
+ex:
+hive>load data local inpath 'file1' overwrite into table tab1;
+hive>select *from tab1;
+1 2 3
+4 5 6
+8 8 9
+
+Handling different file formats
+-------------------------------
+we can handle different file formats by specifying the format at the time creating a hive table.
+
+hive>create table numbers(a int,b int,c int)
+     row format delimited fields terminated by ',';
+
+cat > file1
+1,2,3
+4,5,6
+7,8,9
+
+hive>load data local inpath 'file1' into table numbers;
+hive>select *from numbers;
+
+Wroking with temp dataset
+-------------------------
+
+[cloudera@quickstart ~]$ cat > temp1
+xxxxx2009xxx27xxxx
+xxxxx2010xxx39xxxx
+xxxxx2015xxx-45xxxx
+xxxxx2016xxx49xxxx
+xxxxx2020xxx-55xxxx
+xxxxx2012xxx43xxxx
+xxxxx2006xxx-40xxxx
+
+
+hive>create table rawtemp(line string);
+
+
+hive>load data .....;
+
+
+hive>create table temp(y int,t int);
+
+hive> insert overwrite table temp
+    > select 
+    > substr(line,6,4),
+    > substr(line,13,2)
+    > from rawtemp;
+
+
+hive>select *from temp;
+
+
+
+
+
+loading data into hive table from lfs using put/copyFromLocal
+-------------------------------------------------------------
+We can load files into a hive table by using load command,also it is possible to load a file into hive table by coying a file from lfs to hdfs/hive.
+
+hive>create table test1(a int,b int,c int)
+     row format delimited fields terminated by ',';
+
+[cloudera@quickstart ~]$ hadoop fs -put /home/cloudera/file1 /user/hive/warehouse/test1/
+
+hive>select *from test1;
+
+task2:
+
+xxxxx2009xxx27xxxx
+xxxxx2010xxx39xxxx
+xxxxx2015xxx-45xxxx
+xxxxx2016xxx49xxxx
+xxxxx2020xxx-55xxxx
+xxxxx2012xxx43xxxx
+xxxxx2006xxx-40xxxx
+
+
+
+create a table year_temp,load all the years into one col and teparatures into another column.
+
+
+hive> load data local inpath 'emp_map.txt' overwrite into  table emp_map;
+
+Merging negative and positive tempature into a table
+----------------------------------------------------
+To merge the results of 2 or more sub queries into one table we use unionall command in hive.
+
+hive>create table year_tempr(y int,t int);
+
+hive> insert overwrite table year_tempr;
+
+hive> insert overwrite table year_tempr
+    > select * from (
+    > select substr(line,6,4),substr(line,13,2) from raw_temp where substr(line,13,1)!='-'
+    > union all
+    > select substr(line,6,4),substr(line,13,3) from raw_temp where  substr(line,13,1)='-') temp;
+
+hive>select *from year_tempr;
+OK
+2010	27
+2010	-28
+2010	30
+2017	-35
+2017	40
+2016	-49
+
+Task3:
+
+
+Collection data types/complex datatypes
+---------------------------------------
+Arrays-->collection of elements.
+Map-->collection of key and value pairs. 
+Structure-->collection of attributes with different datatypes.
+
+Array is collection of same type of values.
+
+we use a datatype  "array" to represent array of values in a hive table.
+
+syntax
+------
+colname  array<type>
+
+cat > file1
+[cloudera@quickstart ~]$ cat file1
+1,lux,30.0$40.0$50.0
+2,maggy,20.0$30$40.0
+3,pencil,5.0$6.0$7.0
+
+
+display all rows
+display id,name from items where id is 2,3
+display first 2 prices from array of all rows
+
+
+
+
+
+hive> create table stud(sno int,name string,courses array<string>)
+row format delimited fields terminated by ','
+collection items terminated by '$';
+
+hive>load data local inpath 'file1' into table stud;
+
+
+hive>select *from stud;
+hive>select courses[0] from stud;
+hive>select courses[0] from stud where sno=3;
+
+hive> select courses[3] from stud;
+OK
+hadoop
+NULL
+NULL
+
+cat >file1
+1,manohar,c$cpp$java$hadoop
+2,vidhatri,salesforce$datascience$spark
+
+
+[cloudera@quickstart ~]$ cat > emp.txt
+manohar,101,java$hadoop$andriod
+manohar1,102,java1$hadoop1$andriod1
+manohar2,103,java2$hadoop2$andriod2$salesforce
+manohar3,104,java3$hadoop3$andriod3
+manohar4,105,java4$hadoop4$andriod4
+
+
+create table employee(name string,rno int,skills array<string>)
+    > row format delimited fields terminated by ','
+    > collection items terminated by '$';
+
+
+
+selecting a specific skill of an employee
+-----------------------------------------
+select skills[0] from empolyee where rno=101;
+
+selecting all skills of employee
+--------------------------------
+select skills from employee;
+
+select skills[3] from employee;
+NULL
+salesforce
+NULL
+NULL
+NULL
+
+select *from employee;
+
+searching arrays
+----------------
+we can search an array using the method array_contains().
+
+syntax
+------
+array_contains(colname,'item_name')
+
+select *from course where array_contains(cour,'hadoop');
+
+select cour[0] from course where array_contains(cour,'hadoop');
+
+size() method
+-------------
+It used find the length of array.
+
+syntax
+------
+size(colname) 
+
+
+display length of all the arrays in different rows of a table.
+
+
+explode()
+---------
+It is used split array into items.
+
+syntax
+------
+explode(colname)
+
+select explode(cour) from course;
+
+Map
+---
+
+syntax
+------
+colname map<type1,type2>
+
+type1-->key
+type2-value
+
+
+[cloudera@quickstart ~]$ cat > file1
+1,priyanka,c1=java$c2=hadoop$c3=andriod 
+2,akhila,c1=java$c2=sql$c3=html
+^C
+
+hive> create table stud_map(sno int,name string,courses map<string,string>)
+    > row format delimited fields terminated by ','
+    > 
+ items terminated by '$'
+    > map keys terminated by '=';
+
+hive>load data local inpath 'file1' into table stud_map;
+
+hive>select *from stud_map;
+hive>select courses["c1"] from stud_map;
+hive>select courses["c1"] from stud_map where sno=1;
+
+
+
+[cloudera@quickstart ~]$ cat emp_map.txt 
+manohar,101,s1=java$s2=hadoop$s3=salesforce
+manohar1,102,s1=c$s2=cpp$s3=python
+
+hive> create table employee_map(name string,rno int,skills map<string,string>)
+    > row format delimited fields terminated by ','
+    > collection items terminated by '$'
+    > map keys terminated by '=';
+
+hive>load data local inpath 'emp_map.txt' overwrite into table employee_map;
+
+hive>select *from emp_map;
+
+Accessing a map collection using keys.
+--------------------------------------
+syntax
+------
+varname['keyname']
+or
+colname['keyname']
+
+
+display id,course from map
+display first,last course from a table
+
+
+example
+-------
+hive> select skills['s1'] from emp_map;
+
+Note:
+Keys cannot be duplicated in map,duplicate keys are removed.
+
+struct
+------
+A struct is collection of different datatypes
+
+we define a struct in hive table by using datatype struct
+
+syntax
+------
+colname struct<var1:type1,var2:type2,.......>
+
+ex:
+course struct<name:string,price:double,dur:int>
+
+
+cat > file1
+1,mano,nellore$101$50014
+2,guru,guntur$102$50013
+
+
+
+
+[cloudera@quickstart ~]$ cat > file1
+1,mano,hadoop$6000$45
+2,vijay,java$1500$60
+3,mahesh,salesforce$6000$60
+^C
+
+
+hive> create table course(sno int,name string,cour struct<name:string,price:double,dur:int>)
+    > row format delimited fields terminated by ','
+    > collection items terminated by '$';
+
+hive> load data local inpath 'file1' into table course;
+
+Accessing fields of a structure
+-------------------------------
+structname.varname
+
+ex:
+address.hno
+
+hive>select *from course;
+hive> select cour.name from course;
+
+
+[cloudera@quickstart ~]$ cat > emp_str.txt
+manohar,101,123$abc$hyd
+manohar1,102,145$mnagar$hyd
+
+hive> create table emp_str(name string,eno int,address struct<hno:int,street:string,city:string>)
+    > row format delimited fields terminated by ','
+    > collection items terminated by '$';
+
+hive> load data local inpath 'emp_str.txt' overwrite into table emp_str;
+
+hive>select *from emp_str;
+
+Accessing fields of a structure
+-------------------------------
+structname.varname
+
+ex:
+address.hno
+
+example:
+hive> select address.hno from emp_str where eno=101;
+
+
+
+Hive operations
+---------------
+[cloudera@quickstart ~]$ cat > emp.txt
+eno  name  sal    g dno
+101,AAAAA,1000.00,m,11
+102,BBBBB,2000.00,m,12
+103,CCCCC,3000.00,f,13
+104,DDDDD,4000.00,f,14
+105,EEEEE,5000.00,m,15
+106,FFFFF,6000.00,f,16
+107,GGGGG,7000.00,m,17
+108,HHHHH,8000.00,m,18
+109,xxxxx,1000.00,f,11
+110,yyyyy,2000.00,f,18
+111,zzzzz,2000.00,f,15
+
+
+hive> create table empdata(eno int,name string,sal double,gender string,dno int)
+    > row format delimited fields terminated by ',';
+
+hive>desc empdata;
+
+hive>load data local inpath 'emp.txt'  into table empdata;
+
+hive>select *from empdata;
+
+Queries
+-------
+display all females
+display all males
+
+
+
+hive> select *from empdata where dno=11 or dno=12 and gender='m';
+
+display all males whose dno=11,12
+
+hive> select *from empdata where dno=11or dno=12 and gender='m';
+      or
+hive> select *from empdata where dno in(11,12) and gender='m';
+
+All females not in  dno 13,15
+hive> select *from empdata where dno!=11 and dno!=14 and gender='f';
+or
+hive> select *from empdata where dno not in(13,15) and gender='f';
+
+All rows of 11,14
+
+
+hive> select * from empdata where ((dno=11 or dno=12) and gender='m') or ((dno=13 or dno=15) and gender='f') or (dno=14 or dno=16);
+
+hive>select *from empdata where dno=11 or dno=13 or dno=14;
+hive> select *from empdata where dno in(11,13,14);
+
+Display all dno except dno 13,15.
+hive> select *from empdata where dno!=13 and dno!=14;
+
+
+between
+-------
+hive> select *from empdata where  sal>=3000  and sal<=7000;
+hive> select *from empdata where  sal between   3000 and 7000;
+
+
+Not between
+-----------
+hive> select *from empdata where  sal<3000 or sal>7000;
+hive> select *from empdata where  sal not between   3000 and 7000;
+
+displaying top rows
+-------------------
+hive>select *from  empdata limit  5;
+
+hive> select *from empdata order by sal;
+
+hive> select *from empdata order by sal desc;
+
+Adding new column to a table
+----------------------------
+syntax
+------
+alter table tablename add columns(col1 type,col2 type,....);
+
+hive> alter table empdata add columns(tax int);
+
+
+updating a table
+----------------
+hive> insert overwrite table empdata
+    > select eno,name,sal,gender,dno,sal*0.2 from empdata;
+
+
+like
+----
+create a table replica.
+
+
+syntax
+------
+create table tablename like tablename2;
+
+we copy data from table to table by using insert overwrite/insert into.
+
+hive> create table staff like emp;
+
+hive> insert overwrite table staff
+    > select *from empdata;
+
+hive> insert into table staff
+    > select *from empdata;
+
+Note1:insert overwrite ....;
+     replace old records with new records.
+
+Note2:insert into  ....;
+      appends records to existing table.
+
+
+deleting rows from a table
+--------------------------
+delete all female rows from a staff table but dont' use delete.
+
+hive> insert overwrite table staff
+    > select *from staff where gender='m';
+
+
+conditional transformation
+--------------------------
+if function
+-----------
+It is used to perform conditional transformatins.
+
+if(condition,true val,false val)
+1st argument is condition
+2nd argument true val
+3rd argument false val
+
+[cloudera@quickstart ~]$ cat file1
+200,300
+100,200
+200,100
+700,800
+700,400
+
+hive> create table data(a int,b int)
+    > row format delimited fields terminated by ',';
+
+hive> load data local inpath 'file1' into table data;
+
+hive>select *from data;
+
+syntax
+------
+alter table tablename add columns(col1 type,col2 type,....);
+
+hive>alter table data add columns(big int);
+
+hive> insert overwrite table data
+    > select a,b,if(a>b,a,b) from data;
+
+Nested if functions
+-------------------
+cat > file1 
+100,200,300
+400,200,500
+700,500,100
+900,400,1000
+
+hive> select a,b,c,if(a>b,if(b>c,b,c),if(a>c,a,c)) from ifdata;
+
+
+cleaning null values from a hive table
+-------------------------------------
+[cloudera@quickstart ~]$ cat nulldata.txt
+1,,20
+20,30,
+,50,60
+
+syntax
+-----
+null check
+---------
+colname is null
+
+not null check
+---------------
+colname is not null
+
+
+hive>create table nulldata(a int,b int,c int)
+     row for.......;
+
+hive>load data .....;
+
+hive>select *from nulldata;
+
+hive>
+insert overwrite table nulldata
+select if(a is null,0,a),if(b is null,0,b),if(c is null,0,c) from nulldata;
+
+or
+
+insert overwrite table nulldata
+select nvl(a,0),nvl(b,0),nvl(c,0) from nulldata;
+
+hive> select name from empdata where name like '%A'.
+
+Task:
+in gender col 'm' to be transformed to male
+and f to be transformed to female.
+
+dno
+11-->Marketing
+12-->HR
+13-->finance
+
+hive> select if(gender='m','male','female'),if(dno=11,'marketing',if(dno=12,'hr',if(dno=13,'finance',dno))) from empdata; 
+
+
+coalesce
+--------
+it returns first non null value from a list of values
+it returns null if all values are null.
+
+cat  > data.txt
+,1,,12345
+rama,3,8790,
+vidhatri,4,,
+,,,
+
+syntax
+------
+select coalesce(col1,col2,.....);
+
+
+hive> select coalesce(name,a,b,c) from coaldata;
+OK
+Mano
+rama
+vidhatri
+
+--------------
+
+
+
+hive> select col1,col2...,case colname
+    > when val1 then statement
+    > when val2 then statement
+    > when val3 then statement
+    > else statement
+    > end
+    > from tablename;
+
+
+hive> select name,case dno
+    > when 11 then 'marketing'
+    > when 12 then 'finance'
+    > when 13 then 'hr'
+    > when 14 then 'abc'
+    > when 15 then 'xyz'
+    > when 16 then 'training'
+    > else 'select Proper choice'
+    > end
+    > from empdata;
+
+
+
+
+case:
+
+hive> select dno,case dno
+    > when 11 then 'maeketing'
+    > when 12 then 'hr'
+    > when 13 then 'finance'
+    > else 'others'
+    > end
+    > from empdata;
+
+replace m-->male.
+        f-->female.
+
+hive> select name,case gender
+    > when 'm' then 'male'
+    > when 'f' then 'female'
+    > else gender
+    > end
+    > from empdata
+
+
+hive> insert overwrite table empdata
+    > select eno,name,sal,case gender
+    > when 'm' then 'male'
+    > when 'f' then 'female'
+    > end 
+    > ,dno,sal*0.2  from empdata;
+
+
+hive> create  table year_temp(y int,t int)
+    > row format delimited fields terminated by ',';
+
+
+hive> select substr(line,6,4),if(substr(line,13,1)!='-',substr(line,13,2),substr(line,13,3)) from raw_temp;
+
+
+hive> create  table newemp(y int,t int)
+    > row format delimited fields terminated by ',';
+OK
+Time taken: 0.202 seconds
+hive> insert overwrite table newemp
+    > select substr(line,6,4),if(substr(line,13,1)!='-',substr(line,13,2),substr(line,13,3)) from raw_temp;
+
+
+Aggregate functions in hive
+---------------------------
+sum()
+avg()
+max()
+min()
+count()
+
+
+hive>select sum(sal) from empdata;
+hive>select max(sal) from empdata;
+hive>select min(sal) from empdata;
+hive>select avg(sal) from empdata;
+hive>select count(*) from empdata;
+
+
+How to make sure whether cols has null values or not
+----------------------------------------------------
+hive> select count(*)-count(sal) from empdata;
+
+count(*)-->returns total no of rows.
+count(sal)-->returns count of sal excluding null.
+
+result 0-->if there are no null values.
+result > 0 -->if there are null values.
+
+select *from empdata where sal is null;
+select *from empdata where sal is not null;
+
+displaying count of null in a column
+------------------------------------
+cat > file1
+,,,
+4,5,6
+,4,
+,,,6
+
+create  table nulldata1(a int,b int,c int)
+row for... ;
+
+load data ...;
+
+select count(*) from nulldata1 where a is null;
+3
+select count(*) from nulldata1 where a is not null;
+1
+
+
+
+
+group by
+--------
+To perform aggregations seperately for each data group.
+
+i)display sum of sal 
+ii)display sum of sal according dept
+iii)display sum of sal according dept and gender
+
+syntax
+------
+select col1,col2,aggr_fun1,aggr_fun2,.. from tablename group by col1,col2,.....;
+
+
+
+
+hive> select eno,gender,sum(sal) from empdata group by eno,gender;  
+
+output
+------
+101	m	2000.0
+102	m	4000.0
+103	f	6000.0
+104	f	8000.0
+105	m	10000.0
+106	f	12000.0
+107	m	14000.0
+108	m	16000.0
+
+
+hive>select gender,sum(sal) from empdata group by sal;
+
+hive>select dno,avg(sal) from empdata group by dno;
+
+hive>select gender,sum(sal),avg(sal),max(sal),min(sal),count(*) from empdata group by gender;
+
+hive>select dno,gender,sum(sal)  from empdata group by dno,gender;
+
+Having clause
+-------------
+To filter group items only applicable with 'group by' clause.
+
+syntax
+------
+select col1,col2,aggr_fun1,aggr_fun2,.. from tablename group by col1,col2,.... having col1,col2,... coniditon;
+
+display sum of sal group by dno having dno 11,13,15.
+
+hive> select dno,sum(sal) from empdata group by dno
+    > having dno in(13,14,15);
+
+hive>select dno,sum(sal) from empdata group by dno having dno in(11,15);
+
+combining where and groupby
+
+select col,col2,fun1,fun2,... from tablename where condition group  by col1,col2,... having col1,col2 condition
+
+diplaying all females and sal>=4000 group by dno whose dno is between 11,15
+
+hive> select dno,sum(sal) from empdata where gender='f' and sal>=4000 group by dno having dno between 11 and 15;
+
+
+hive>select dno,sum(sal) from empdata where gender='f' and sal>=40000 group by dno having dno in(11,15);
+
+Agrregate functions in having clause
+-------------------------------------
+displaying all rows from empdata group by dno,sum of sal >=4000
+
+hive> select dno,count(*) from empdata group by dno having sum(sal)>=4000;
+
+
+hive>select dno,count(*)  from empdata group by dno having sum(sal)>5000;
+
+hive>select dno,sum(sal) from empdata where dno in(12,16) group by dno;
+
+hive>select dno,sum(sal) from empdata group by dno having dno in(12,16);
+
+order by and group by
+---------------------
+order by is used to display rows according to sorted order either ascending or descending.
+
+display all dno group by dno order by sal
+
+hive> select dno,sal from empdata group by dno,sal  order by sal desc;
+
+limit
+-----
+display top n rows
+
+hive>select dno,sum(sal) as tot from emp  
+group by dno
+order by tot desc
+limit 2;
+
+hive>select page,count(*) as cnt from weblog  
+group by page
+order by cnt desc
+limit 5;
+
+display 2nd max sal from a table
+
+
+distinct()
+----------
+used to eliminate duplicate rows
+
+syntax
+------
+select distinct(colname) from tablename;
+
+ex:
+hive> select distinct(sal) from empdata;
+
+Joins
+-----
+A Join is used to retrieve data from 2 or more tables based on a common columns
+
+inner join
+----------
+Displays all the matching rows between 2 tables based on some criteria.
+
+[cloudera@quickstart ~]$ cat > emp.txt
+eno  name  sal    g dno
+101,AAAAA,1000.00,m,11
+102,BBBBB,2000.00,m,12
+103,CCCCC,3000.00,f,13
+104,DDDDD,4000.00,f,14
+105,EEEEE,5000.00,m,15
+106,FFFFF,6000.00,f,16
+107,GGGGG,7000.00,m,17
+108,HHHHH,8000.00,m,18
+109,xxxxx,1000.00,f,11
+110,yyyyy,2000.00,f,18
+111,zzzzz,2000.00,f,15
+
+create 2 table
+empdata
+eno
+name
+sal
+gender
+dno
+tax
+
+dept
+dno dname    loc
+11,marketing,hyd
+12,hr,del
+13,finance,hyd
+
+syntax
+------
+select reference1.col1,refence1.col2,....reference2.col1,... from tablename1 reference1 inner join tablename2 reference2 on condition;
+
+hive> select e.eno,e.name,e.sal,e.dno,d.dname,d.dloc from emp_data e inner join dept d on e.dno=d.dno;
+
+hive>create table dept(dno int,dname string,dloc string);
+     row format delimited fields terminated by ',';
+
+hive>insert into dept values(11,'training','hyd');
+hive>insert into dept values(13,'IT','hyd');
+hive>insert into dept values(14,'Automobile','hyd');
+hive>insert into dept values(15,'Finance','hyd');
+
+
+hive> select *from dept;
+OK
+cat > dept.txt
+11,training,hyd
+13,IT,hyd
+14,Automobile,hyd
+16,Finance,hyd
+
+Task:
+Displays employee,dept details matching between both tables.
+
+example:
+hive>hive> select eno,name,sal,d.dno,d.name from empdata e join dept d on(e.dno=d.dno);
+
+101	AAAAA	1000.0	11	training
+103	CCCCC	3000.0	13	IT
+104	DDDDD	4000.0	14	Automobile
+106	FFFFF	6000.0	16	Finance
+
+
+
+outer join
+left outer join
+select reference1.col1,refence1.col2,....reference2.col1,... from tablename1 reference1 left join tablename2 reference2 on condition;
+
+
+hive> select e.eno,e.name,e.sal,d.name,d.dno,d.loc from empdata e left join dept  d on(e.dno=d.dno);
+
+
+OK
+1	aaaa	1000.0	training	11	hyd
+2	bbbb	2000.0	NULL	NULL	NULL
+3	cccc	3000.0	finance	13	hyd
+4	dddd	4000.0	hr	14	chennai
+5	eeee	5000.0	training	11	hyd
+6	ffff	2000.0	analyst	15	delhi
+7	gggg	3000.0	finance	13	hyd
+8	hhhh	4000.0	NULL	NULL	NULL
+1	cccc	NULL	NULL	NULL	NULL
+
+
+
+right outer join
+select reference1.col1,refence1.col2,....reference2.col1,... from tablename1 reference1 right join tablename2 reference2 on condition;
+
+hive> select eno,name,sal,d.dno,dname from empdata e right outer join dept d on(e.dno=d.dno);
+
+full outer join
+---------------
+select reference1.col1,refence1.col2,....reference2.col1,... from tablename1 reference1 full outer join tablename2 reference2 on condition;
+
+
+hive> select eno,name,sal,d.dno,dname from empdata e full outer join dept d on(e.dno=d.dno);
+
+cross join
+----------
+cartesian product
+select reference1.col1,refence1.col2,....reference2.col1,... from tablename1 reference1 cross  join tablename2 reference2;
+
+
+hive> select e.eno,e.name,e.sal,d.name,d.dno,d.loc from empdata e cross join dept  d;
+
+self join
+---------
+hive> select e.eno,e.name,e.sal from empdata e  join empdata  e1 on(e.eno=e1.eno);
+
+
+Displays matching rows between two cols of same table.
+We can apply both inner as well as outer join on self join.
+
+
+Merging tables
+--------------
+union
+unionall
+
+
+union merges 2 tables but doesn't allow duplicates. 
+union all merges 2 tables, allow duplicates. 
+union is not suppoted in hive.
+
+while applying unionall we should apply a subquery along with an alias.
+
+create table tab1(line string);
+insert into tab1 values('Manohar is Good person');
+
+create table tab2(line string);
+insert into tab2 values('Manohar lives for teaching');
+
+create table tab3(line string);
+hive> insert overwrite table tab3 
+    > select * from(
+    > select *from tab1
+    > union all
+    > select *from tab2) tab;
+
+
+
+
+
+Assignment
+----------
+Merging 2 tables into a table with same cols
+Merging 2 tables into a table with  change in cols order.
+Merging 2 tables into a table with  change in table strcuture.
+
+
+Partition table
+---------------
+Dividing a table with large datasets into parts called as partitions according to a column(s) of a table is known as partition tables.
+
+Partition tables reduces the search time of a query in a table with large datasets according to a partition insted of searching all the records of a table.
+
+Partitions are logical division of a table.
+
+creating a partition table
+--------------------------
+We can create a partition table by using the commmad
+"partitioned by" along with a create statement.
+
+syntax
+------
+create table tablename(col1 type,col2 type,.....)
+partitioned by(col1 type,col2,....)
+row format delimited fields terminated by ',';
+
+ex:
+hive> create table emp_part(eno int,name string,sal double,gender string,dno int)
+    > partitioned by(g string)
+    > row format delimited fields terminated by ',';
+
+describe emp_part
+-----------------
+eno                 	int                 	                    
+name                	string              	                    
+sal                 	double              	                    
+gender              	string              	                    
+dno                 	int                 	                    
+g                   	string              	                    
+	 	 
+# Partition Information	 	 
+# col_name            	data_type           	comment             
+	 	 
+g                   	string 
+
+In the above the firts part is physical partition and second part is logical partition.
+
+Here col names of table and partition colname must not be same.
+
+creating a non partition table
+------------------------------
+hive> create table empdata(eno int,name string,sal double,gender string,dno int)
+   > row format delimited fields terminated by ',';
+
+cat > emp
+305,akanksha,80000,f,15
+101,mano,26000,m,11
+102,sajay,25000,f,11
+103,naveen,13000,m,13
+104,chakrismart,8000,f,12
+105,ravi,6000,m,13
+101,hari,10000,f,12
+201,aaa,30000,m,12
+202,bbbb,50000,f,13
+203,ccc,10000,f,13
+204,ddddd,50000,m,13
+304,xxx,70000,m,14
+
+
+hive>load data local inpath 'emp' into table empdata;
+
+Loading data into a partition table from a non partition table
+--------------------------------------------------------------
+syntax
+------
+insert overwrite table tablename
+partition(col1=val,col2=val)
+select query ....;
+
+
+hive> insert overwrite table emp_partition
+    > partition(g='f')
+    > select *from  from empnp where gender='f';
+
+
+hive> insert overwrite table emp_partition
+    > partition(g='m')
+    > select *from empnp where gender='m';
+
+
+Here emp_partition is created as directory
+Every partition is created as a sub directory in emp_partition
+Inside partition a file is created as 000000_0.
+
+In hdfs
+-------
+/user/hive/warehouse/emp_partition/g=f/000000_0-->female partitiom
+All records of female are available in this.
+
+/user/hive/warehouse/emp_partition/g=m/000000_0-->male partitiom
+All records of male are available in this.
+
+
+selecting records from partition
+--------------------------------
+hive>select *from emp_partition;
+displays all records
+
+hive>select *from emp_partition where g='m';
+displays all records from male partition.
+
+
+hive>select *from emp_partition where g='f';
+displays all records from female partition.
+
+Multiple partition in hive tables
+---------------------------------
+create a table with partitions using multiple cols dno,gender
+
+hive> create table emp_mpart(eno int,name string,sal double)
+    > partitioned by(dno int,gender string)
+    > row format delimited fields terminated by ',';
+
+load data into partitions from a non partition table
+----------------------------------------------------
+hive> insert overwrite table emp_mpart
+    > partition(dno=11,gender='m')
+    > select eno,name,sal from empdata where dno=11 and gender='m';
+
+hive> insert overwrite table emp_mpart
+    > partition(dno=11,gender='f')
+    > select eno,name,sal from empdata where dno=11 and gender='f';
+
+displays all records
+displays both male and female records from dept 11
+displays all male records from dept 11
+
+
+selecting records
+-----------------
+hive>select *from emp_mpart;
+hive>select *from emp_mpart where dno=11;
+hive>select *from emp_mpart where dno=11 and gender='m';
+
+ 
+hive>desc emp_mpart
+eno                 	int                 	                    
+name                	string              	                    
+sal                 	double              	                    
+dno                 	int                 	                    
+gender              	string              	                    
+	 	 
+# Partition Information	 	 
+# col_name            	data_type           	comment             
+	 	 
+dno                 	int                 	                    
+gender              	string     
+
+In hdfs partitions are created according to dno and gender
+
+/user/hive/warehouse/emp_mpart/dno=11---->g=m-->000000_0
+                                     ---->g=f-->000000_0
+
+Here dno is a subdirectory to table. 
+g=m,g=f are subdirectory to dno.
+000000_0 is data partition file according to gender.
+
+
+Multiple inserts into partition table
+-------------------------------------
+we can perform all inserts at a time
+
+hive>from empdata
+     insert overwrite table emp_mpart
+     partition(dno=11,gender='m')
+     select eno,name,sal where dno=11 and gender='m')
+     insert overwrite table emp_mpart
+     partition(dno=12,gender='m')
+     select eno,name,sal where dno=12 and gender='m')
+     insert overwrite table emp_mpart
+     partition(dno=13,gender='m')
+     select eno,name,sal where dno=13 and gender='m')
+     insert overwrite table emp_mpart
+     partition(dno=14,gender='m')
+     select eno,name,sal where dno=14 and gender='m')
+
+dynamic partition
+-----------------
+suppose if we have 200 depts,here we have create 200 partitions we should load datasets explicitly (manually) dept wise ,to avoid this we go for dynamic partition.
+
+In dynamic partition,partition of table is implicitly done based on a column(s).
+
+To create dynamic partition we should set 2 properties 
+hive>set hive.exec.dynamic.partition=true;
+hive>set hive.exec.dynamic.partition.mode=nonstrict;
+
+create a dynamic table
+----------------------
+create table emp_dpart(eno int,name string,sal double)
+partitioned by(dno int,gender string)
+row form ......;
+
+copy data from a non partition table
+------------------------------------
+insert overwrite table emp_dpart 
+partition(dno,gender)
+select eno,name,sal,dno,gender from empdata;
+
+Here we are inserting values into partion without specifying dno or gender explicitly i,e static representation.
+
+
+examine data
+-----------
+hive>select *from emp_dpart;
+
+
+In hdfs
+
+/user/hive/warehouse/emp_dpart/dno=11-->gender='m'-->000000_0
+                                     -->gender='f'-->000000_0
+
+Here dno=11 is subdirectory of emp_dpart
+gender='m' and gender='f' is a sub directory of dno=11
+
+similary for each dno partitions are created as shown above.
+
+
+querying partition dno 
+querying partition dno and subpartition gender
+
+hive> select *from emp_dpart where depno=11;
+OK
+101	AAAAA	1000.0	11	m
+Time taken: 0.126 seconds, Fetched: 1 row(s)
+hive> select *from emp_dpart where depno=11 and gender='m';
+OK
+101	AAAAA	1000.0	11	m
+Time taken: 0.262 seconds, Fetched: 1 row(s)
+hive> select *from emp_dpart where depno=11 and gender='f';
+OK
+
+Limitations
+ -----------
+As number of partitions increases,metadata size of namenode increases which becomes a burdon on namenode.
+
+suppose we 100 dno and 100 cities and we are doing partition based on (dno,city) it creates 10000 partitions which eventually increases the size of metadata.
+
+To overcome this we can implement bucketing.
+
+Bucketing 
+---------
+A bucket is a file where the keys are mainatained in a Hashtable
+in the form of a directory.
+
+In bucketing all similar keys are placed into same bucket also we choose how many buckets we need based on available records so that we can keep the size of the buckets  in control.
+
+Bucket is nothing but a kind of partitioning.
+
+To implement bucketing in hive we should set  a property
+
+hive>set hive.enforce.bucketing=true;
+
+How to create a bucket table
+----------------------------
+we create a bucketed table by using command clustered by also we should specify how many buckets we should create.
+
+syntax
+------
+create table tablename(col1 type,col2 type,...)
+clustered by(col1,...)
+into n buckets
+
+n-->no of buckets.
+
+example
+-------
+hive> create table emp_buckets(eno int,name string,sal int,gender string,dno int)
+    > clustered by(dno)
+    > into 3 buckets;
+
+inserting data into bucketed table
+----------------------------------
+hive> insert overwrite table emp_buckets
+      select *from empdata;
+
+hive>select *from emp_buckets;
+
+In hdfs 3 bucket files are created
+ /user/hive/warehouse/emp_buckets/000000_0
+                                  000001_0
+                                  000002_0
+
+
+
+
+creating hive table with multiple columns
+------------------------------------------
+hive> create table emp_buckets12(eno string,name string,sal double,gender string,dno int)
+    > clustered by(dno,gender)
+    > into 4 buckets;
+
+hive>insert overwrite table emp_buckets12
+     select *from empdata;
+
+In hdfs,4 data files are created
+/user/hive/warehouse/emp_buckets12/000000_0
+                                   000001_0
+                                   000002_0
+                                   000003_0
+
+hive>select *from emp_bucktes12;
+
+creating table combining partition and bucketing
+------------------------------------------------
+hive> create table emp_part_buckets(eno int,name string,sal double,dno int)
+    > partitioned by(gender string)
+    > clustered by(dno)
+    > into 3 buckets
+    > row format delimited fields terminated by ',';
+
+
+loading data file partition buckets
+hive> insert overwrite table emp_part_buckets
+    > partition(gender)
+    > select eno,name,sal,dno,gender from empdata;
+
+In hdfs
+  /user/hive/warehouse/emp_part_buckets/gender=m/000000_0
+                                                 000001_0
+                                                 000002_0
+                                                  
+
+  /user/hive/warehouse/emp_part_buckets/gender=f/000000_0
+                                                 000001_0
+                                                 000002_0
+                                                 
+           
+hive>select *from emp_part_buckets
+
+{
+  "name":"manohar",
+  "gender":"male",
+  "color":"white",
+  "age":34
+}
+
+[cloudera@quickstart ~]$ cat >  json1
+{"name":"manohar","gender":"male","age":"34"}
+{"name":"vidhatri","gender":"female","age":"1","city":"nellore"}
+^C
+
+hive> create database jsondatabase;
+hive> use jsondatabase;
+hive> create table person(line string);
+hive> load data local inpath 'json1' into table person;
+hive> select *from person;
+
+hive:get_json_object
+--------------------
+This method is used to select a property/node from a json file/record in a hive table.
+
+It takes 2  parameters
+i)colname
+ii)propertyname
+
+syntax
+------
+get_json_object(colname,'propertyname');
+
+$-->It is rootnode of json record.
+
+hive> select get_json_object(line,'$.name') from person;
+
+hive> select
+    > get_json_object(line,'$.name'),
+    > get_json_object(line,'$.age'),
+    > get_json_object(line,'$.gender'),
+    > get_json_object(line,'$.city')
+    > from person;
+
+converting semistructured to structured in hive 
+-----------------------------------------------
+we can split the properties of a json into cols of a hive table,which makes json strcuctured.
+
+hive> create table personal_details(name string,age int,gender string,city string);
+
+hive> insert overwrite table personal_details
+    > select 
+    > get_json_object(line,'$.name')
+    > ,get_json_object(line,'$.age'),
+    > get_json_object(line,'$.gender'),
+    > get_json_object(line,'$.city')
+    > from person;
+
+
+hive:json_tuple
+---------------
+A json_tuple is used to split raw data into cols/properties.
+
+hive> create table personal_details(name string,gender string,age int,city string);
+
+hive>insert ....
+   >select alisname.* from tablename
+    lateral view 
+    json_tuple(colname,'prop1,'prop2',.....)
+    aliasname as name1,name2,.....;
+    
+
+hive> insert overwrite table personal_details
+    > select x.* from json_rawtable
+    > lateral view json_tuple
+    > (line,'name','gender','age','city')
+    > x as n,g,a,c;
+
+
+Json with child node
+--------------------
+[cloudera@quickstart ~]$ cat >  json2
+{"name":"manohar","age":"34","address":{"state":"india","city":"hyd"},"gender":"male"}
+
+$.address.state
+
+
+hive> create table person_info(line string);
+hive> load data local inpath 'json2' into table person_info;
+hive> select *from person_info;
+
+Loading data col wise
+---------------------
+hive> create table person_info_table(name string,age int,address string,gender string);
+
+hive> insert overwrite table person_info_table
+    > select x.* from person_info
+    > lateral view 
+    > json_tuple(line,'name','age','address','gender')x
+    > as n,a,addr,g;
+hive> select *from person_info_table;
+
+Loading child node by spitting col wise
+---------------------------------------
+hive> create table per_info(name string,age int,state string,city string,gender string);
+
+hive> insert overwrite table json_strdata
+    > select 
+    > get_json_object(line,'$.name'),
+    > get_json_object(line,'$.age'),
+    > get_json_object(line,'$.address.state'),
+    > get_json_object(line,'$.address.city'),
+    > get_json_object(line,'$.gender')
+    > from json_rawtable;
+
+
+hive> insert overwrite table per_info
+    > select name,age,get_json_object(address,'$.state'),
+    > get_json_object(address,'$.city'),
+    > gender from person_info_table;
+
+hive>select *from per_info;
+
+
+
+xml with nested tags.
+
+[training@localhost ~]$ cat xml2
+<rec><name><fname>Ravi</fname><lname>kumar</lname></name><age>25</age><contact><email><personal>ravi@gmail.com</personal><official>ravi@infy.com</official></email><phone><mobile>12345</mobile><office>12346</office><residence>12347</residence></phone></contact></rec>
+[training@localhost ~]$ 
+
+hive> create table xraw(line string);
+OK
+Time taken: 0.075 seconds
+hive> load data local inpath 'xml2'
+    >  into table xraw;
+
+hive> select * from xraw;
+OK
+<rec><name><fname>Mano</fname><lname>Papasani</lname></name><age>25</age><contact><email><personal>mano@gmail.com</personal><official>mano@infy.com</official></email><phone><mobile>12345</mobile><office>12346</office><residence>12347</residence></phone></contact></rec>
+Time taken: 0.064 seconds
+hive> 
+
+hive> create table info(fname string, 
+    >   lname string, 
+    > age int, personal_email string,
+    >  official_email string,
+    >  mobile string, office string, 
+    >  residence string);
+OK
+Time taken: 0.042 seconds
+hive> 
+
+hive> insert overwrite table info
+    >   select 
+    > xpath_string(line,'rec/name/fname'),
+    > xpath_string(line,'rec/name/lname'),
+    > xpath_int(line,'rec/age'),          
+    > xpath_string(line,'rec/contact/email/personal'),
+    > xpath_string(line,'rec/contact/email/official'),
+    > xpath_string(line,'rec/contact/phone/mobile'),
+    > xpath_string(line,'rec/contact/phone/office'),
+    > xpath_string(line,'rec/contact/phone/residence') 
+    >  from xraw;
+
+hive> select * from info;
+OK
+Ravi    kumar   25      ravi@gmail.com  ravi@infy.com     12345   12346   12347
+Time taken: 0.064 seconds
+hive> 
+_____________
+
+xml with collections.
+
+[training@localhost ~]$ cat xml3
+<rec><name>Amar</name><qual>Btech</qual><qual>Mtech</qual></rec>
+<rec><name>Amala</name><qual>Bsc</qual><qual>Msc</qual><qual>Mtech</qual></rec>
+<rec><name>Akash</name><qual>Btech</qual><qual>Mba</qual></rec>
+[training@localhost ~]$ 
+
+hive> create table yraw(line string);
+OK
+Time taken: 0.043 seconds
+hive> load data local inpath 'xml3'
+    >  into table yraw;
+
+hive> select * from yraw;
+<rec><name>Amar</name><qual>Btech</qual><qual>Mtech</qual></rec>
+<rec><name>Amala</name><qual>Bsc</qual><qual>Msc</qual><qual>Mtech</qual></rec>
+<rec><name>Akash</name><qual>Btech</qual><qual>Mba</qual></rec>
+
+hive> 
+hive> create table raw2(name string, 
+    >    qual  array<string>);
+OK
+Time taken: 0.039 seconds
+hive> insert overwrite table raw2
+    >   select xpath_string(line,'rec/name'),
+    >  xpath(line,'rec/qual/text()')
+    >   from yraw;
+
+hive> select * from raw2;
+OK
+Amar    ["Btech","Mtech"]
+Amala   ["Bsc","Msc","Mtech"]
+Akash   ["Btech","Mba"]
+Time taken: 0.061 seconds
+hive> 
+
+hive> select name, size(qual) from raw2;
+
+Amar    2
+Amala   3
+Akash   2
+
+how to access array elements,
+
+ by using index numbers
+
+ indexing starts from 0.
+
+hive> select qual[0], qual[1],
+          qual[2] from raw2;
+Btech   Mtech   NULL
+Bsc     Msc     Mtech
+Btech   Mba     NULL
+
+search for elements with in array.
+
+hive> select * from raw2 
+    >  where array_contains(qual,'Mtech');
+
+
+Amar    ["Btech","Mtech"]
+Amala   ["Bsc","Msc","Mtech"]
+
+_______________
+Flattening Array elements:
+
+hive> select explode(qual) as q 
+   from raw2;
+
+Btech
+Mtech
+Bsc
+Msc
+Mtech
+Btech
+Mba
+
+
+hive> select name, explode(qual) as q from raw2;
+FAILED: Error in semantic analysis: UDTF's are not supported outside the SELECT clause, nor nested in expressions
+hive> 
+
+-- above query is invalid,
+   bcoz, udtf can not be applied with other column expressions.
+
+hive> create table  yinfo(name string, 
+    >      qual string);
+OK
+Time taken: 0.035 seconds
+hive> insert overwrite table yinfo 
+    >   select name, myq from raw2
+    >    lateral view explode(qual) q as myq;
+
+hive> select * from yinfo;
+OK
+Amar    Btech
+Amar    Mtech
+Amala   Bsc
+Amala   Msc
+Amala   Mtech
+Akash   Btech
+Akash   Mba
+Time taken: 0.055 seconds
+
+hive> select * from yinfo   
+    >   where qual in ('Msc','Mtech');
+
+
+Amar    Mtech
+Amala   Msc
+Amala   Mtech
+
+hive> create table yres(qual string, cnt int);
+OK
+Time taken: 0.036 seconds
+hive> insert overwrite table yres
+    >   select qual, count(*) from yinfo
+    >    group by qual;
+
+hive> select * from yres;
+OK
+Bsc     1
+Btech   2
+Mba     1
+Msc     1
+Mtech   2
+Time taken: 0.051 seconds
+hive> 
+
+____________________
+
+Assignment:
+
+[training@localhost ~]$ cat xml4
+<tr><cid>101</cid><pr>1000</pr><pr>3000</pr></tr>
+<tr><cid>102</cid><pr>1200</pr><pr>2000</pr><pr>5000</pr></tr>
+<tr><cid>101</cid><pr>4000</pr></tr>
+[training@localhost ~]$ 
+
+hive> create database sales;
+hive> use sales;
+hive> create table raw(line string);
+hive> load data local inpath 'xml4'
+   into table raw;
+hive> create table raw2(cid string, 
+    pr array<string>);
+
+hive> insert overwrite table raw2
+   select xpath_string(line,'tr/cid'),
+   xpath(line,'tr/pr/text()')
+    from raw;
+hive> create table raw3(cid string, 
+   pr int);
+hive> insert overwrite table raw3
+    select cid, mypr from  raw2
+   lateral view explode(pr) p as mypr;
+
+hive> create table results(cid string, 
+   totbill int);
+hive> insert overwrite table results
+   select cid, sum(pr)
+   from raw3
+   group by cid;
+
+hive> select * from results;
+
+Nested xml tags
+---------------
+cat > nxml
+<employee><name><fname>Manohar</fname><lname>Papasani</lname></name><eno>1001</eno><sal>1000.00</sal></employee> 
+  
+hive> create table  nxmldata(line string);
+OK
+Time taken: 0.32 seconds
+
+hive> load data local inpath 'nxml' into table nxmldata;
+Loading data to table default.nxmldata
+Table default.nxmldata stats: [numFiles=1, totalSize=113]
+OK
+Time taken: 1.045 seconds
+
+hive> insert overwrite table xml_employee
+    > select
+    > xpath_string(line,'employee/name/fname'),
+    > xpath_string(line,'employee/name/lname'),
+    > xpath_string(line,'employee/eno'),
+    > xpath_string(line,'employee/sal')
+    > from nxmldata;
+
+hive>select *from xml_employee;
+ 
+hive> select *from nxmldata;
+OK
+<employee><name><fname>Manohar</fname><lname>Papasani</lname></name><eno>1001</eno><sal>1000.00</sal></employee>
+Time taken: 0.188 seconds, Fetched: 1 row(s)
+
+
+hive> create table cxmldata(line string);
+hive> load data local inpath 'cxml' into table cxmldata;
+hive> select *from cxmldata;
+OK
+<student><name>Manohar</name><course>Hadoop</course><course>java</course><course>Andriod</course><course>salesforce</course><price>10000.00</price></student>
+
+hive> create table sxml_student(name string,course array<string>,price double)
+    > row format delimited fields terminated by ',';
+
+hive> select *from cxmldata;
+OK
+<student><name>Manohar</name><course>Hadoop</course><course>java</course><course>Andriod</course><course>salesforce</course><price>10000.00</price></student>
+
+hive> insert overwrite table sxml_student
+    > select
+    > xpath_string(line,'student/name'),
+    > xpath(line,'student/course/text()'),
+    > xpath_string(line,'student/price')
+    > from cxmldata;
+
+
+hive> select name,course[0],course[1],course[2],price from sxml_student;
+
+ 
+size()
+search
+flattening
+
+cat > cxml
+<student><name>Manohar</name><course>Hadoop</course><course>java</course><course>Andriod</course><price>6000.00</price><price>15000.00</price><price>5000.00</price></student>
+
+hive>create table cxml_data(line string);
+
+hive>load data .....;
+
+hive>create table sxml_stud(name string,course array<string>,price array<string>);
+
+hive> insert overwrite table sxml_stud
+    > select 
+    > xpath_string(line,'student/name'),
+    > xpath(line,'student/course/text()'),
+    > xpath(line,'student/price/text()')
+    > from cxml_data;
+
+Different xpath udfs
+--------------------
+xpath returns a Hive array of strings.
+
+xpath_string returns a string.
+xpath_boolean returns a boolean.
+xpath_short returns a short integer.
+xpath_int returns an integer.
+xpath_long returns a long integer.
+xpath_float returns a floating point number.
+xpath_double,xpath_number returns a double-precision floating point number (xpath_number is an alias for xpath_double).
+
+
+hive> select *,ROW_NUMBER() OVER()
+    > from tablename;
+
+ex:
+hive>select *,ROW_NUMBER() OVER()
+    > from empdata;
+
+
+lateral view in xml
+-------------------
+we cannot apply explode() with other columns in a hive table but we can implement that by using lateral view along with explode() function as shown in the above example.
+
+hive.select eno,name,sal,gender,dname,dloc from staff s  join dept d on(s.dno=d.dno);
+
+For each city total sal required
+hive> select dloc,sum(sal) from staff s join dept d on(s.dno=d.dno)group by dloc;
+
+
+Json serde in hive
+------------------
+{
+"name":"manohar",
+"age":"34",
+"gender":"male"
+"address":{"city":"hyd","state":"ts"}
+}
+
+convert to line
+---------------
+{"name":"manohar","age":"34","gender":"male","address":{"city":"hyd","state":"ts"}}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+       
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
